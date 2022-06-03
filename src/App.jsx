@@ -6,6 +6,8 @@ import Racoon from './Components/020/Racoon';
 import Cuckoo from './Components/020/Cuckoo';
 import Dog from './Components/020/Dog';
 import NotFound from './Components/020/NotFound';
+import rand from './Funkcijos/rand';
+import RandomColor from './Funkcijos/randColor';
 
 
 
@@ -23,22 +25,31 @@ function App() {
                 </div>   
                     <div className='links'>
                         <Link to='/'>Sweet Home Alabama</Link>
-                        {
-                                 Array(1,1,1,1,1,1).map((_, i) =><Link key={i} to='/racoon'>Racoon Trash Can No: {i +1}</Link> )
+                        <h3>Racoon</h3>
+                            {
+                                [...Array(rand(2, 11))].map((_, i) => <Link key={i} to={'/racoon/' + (i + 1)}>Racoon Trash Can No: {i + 1}</Link> )
+                             }
+
+                        <h3>Cuckoo</h3>     
+                             {
+                                 [...Array(rand(3, 7))].map((_, i) => <Link key={i} to={'/cuckoo/' + (i + 1) + '/' + RandomColor(false)}>Cuckoo Nest: {i + 1}</Link>)
                              }
                         
-                        <Link to='cuckoo'>Cuckoo Nest</Link>
+                        <h3>Dog</h3>
                         <Link to='/dog'>Dog House</Link>
                     </div>
                 <div>  
-                     <h2>Homes</h2>
+                     
                      <div>
                          <Routes>
                              <Route path='/' element={<Alabama/>}></Route>
-                             
-                             <Route path='/racoon' element={<Racoon/>}></Route>
-                             <Route path='/cuckoo' element={<Cuckoo/>}></Route>
-                             <Route path='/dog' element={<Dog/>}></Route>
+                             <Route path='/racoon/:id' element={<Racoon/>}></Route>
+                             <Route path='/cuckoo/:id/:color' element={<Cuckoo/>}></Route>
+                             <Route path='/dog' element={<Dog/>}>
+                                 <Route path='green' element={<div className='sm-squer' style={{backgroundColor: 'green'}}></div>}></Route>
+                                 <Route path='pink' element={<div className='sm-squer' style={{backgroundColor: 'pink'}}></div>}></Route>
+
+                             </Route>
                              <Route path='*' element={<NotFound/>}></Route>
 
                          </Routes>
