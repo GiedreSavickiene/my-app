@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './App.scss';
-import{BrowserRouter, Link, Routes, Route} from 'react-router-dom'
+import{BrowserRouter, Link, Routes, Route, NavLink} from 'react-router-dom'
 import Alabama from './Components/020/Alabama';
 import Racoon from './Components/020/Racoon';
 import Cuckoo from './Components/020/Cuckoo';
@@ -8,6 +8,7 @@ import Dog from './Components/020/Dog';
 import NotFound from './Components/020/NotFound';
 import rand from './Funkcijos/rand';
 import RandomColor from './Funkcijos/randColor';
+import Frog from './Components/020/Frog';
 
 
 
@@ -27,7 +28,7 @@ function App() {
                         <Link to='/'>Sweet Home Alabama</Link>
                         <h3>Racoon</h3>
                             {
-                                [...Array(rand(2, 11))].map((_, i) => <Link key={i} to={'/racoon/' + (i + 1)}>Racoon Trash Can No: {i + 1}</Link> )
+                                [...Array(rand(2, 11))].map((_, i) => <NavLink style={ ({ isActive }) => ({color: isActive ? 'crimson' : ''})} key={i} to={'/racoon/' + (i + 1)}>Racoon Trash Can No: {i + 1}</NavLink> )
                              }
 
                         <h3>Cuckoo</h3>     
@@ -37,6 +38,7 @@ function App() {
                         
                         <h3>Dog</h3>
                         <Link to='/dog'>Dog House</Link>
+                        <Link to='/frog'>Frog House</Link>
                     </div>
                 <div>  
                      
@@ -48,6 +50,11 @@ function App() {
                              <Route path='/dog' element={<Dog/>}>
                                  <Route path='green' element={<div className='sm-squer' style={{backgroundColor: 'green'}}></div>}></Route>
                                  <Route path='pink' element={<div className='sm-squer' style={{backgroundColor: 'pink'}}></div>}></Route>
+
+                             </Route>
+                             <Route path='/frog' element={<Frog/>}>
+                                 <Route path='crimson' element={<div className='sm-squer' style={{backgroundColor: 'crimson', borderRadius: '50%'}}></div>}></Route>
+                                 <Route path='skyblue' element={<div className='sm-squer' style={{backgroundColor: 'skyblue', borderRadius: '50%'}}></div>}></Route>
 
                              </Route>
                              <Route path='*' element={<NotFound/>}></Route>
