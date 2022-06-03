@@ -1,72 +1,92 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.scss';
-import Create from './Components/016/Create';
-import Edit from './Components/016/Edit';
-import List from './Components/016/List';
-import rand from './Funkcijos/rand'
+import Tree from './Components/018/Tree';
+import axios from 'axios'
+import Animal from './Components/018/Animal';
+import CreateTree from './Components/018/CreateTree';
+import CreateAnimal from './Components/018/CreateAnimal';
+import TreeEdit from './Components/018/TreeEdit';
 
 
 
 
 function App() { 
 
+const [lastTreeUpdate, setLastTreeUpdate] = useState(Date.now())    
 
-const [list, setList] = useState([])//listo rodymas
-const [modal, setModal] = useState(null);//edito rodymas
-const [name, setName] = useState('')
-const [color, setColor] = useState('')
-const [select, setSelect] = useState('medium')
-const [red, setRed] = useState(false)
-const [range, setRange] = useState('150')
-const [count, setCount] = useState('')
+const [treeList, setTreeList] = useState(null);
+
+//nuskaitymas is DB READ
+useEffect (() => {
+    axios.get('http://localhost:3003/trees')
+    .then(res => {
+        setTreeList(res.data)
+    })
+}, [lastTreeUpdate]);
+
+const [animalsList, setAnimalsList] = useState(null)
+
+useEffect(() =>{
+    axios.get('http://localhost:3003/animals')
+    .then(res =>{
+        setAnimalsList(res.data)
+    })
+}, [])
 
 
 
+//CREATE
+const [createTreeData, setCreateTreeData] = useState(null)
+const [createAnialData, setCreateAnimalData] = useState(null)
 
-const handleSelect = e => setSelect(e.target.value)
-
-
-
-const add = () => {
-    const obj = {name, color, id:rand(10000, 99999), select, red, range, count} // tai sutrumpintas variantask kaip{name: name, color:color} 
-    setList(oldList => [...oldList, obj])
-   
-    
-}
-const edit = obj => {
-        setList(oldList => oldList.map(o => o.id === obj.id ? obj : o));
+useEffect (() => {
+    if(null === createTreeData){
+        return;
     }
-
-//rusiuojam List by name
-const sortName = () =>{
-    setList(oldList => {
-        return [...oldList].sort((a, b)=>{
-           if(a.name > b.name) return 1;
-           if(a.name < b.name) return -1;
-           return 0;
-
-        })
+    axios.post('http://localhost:3003/trees', createTreeData)
+    .then(res => {
+       setLastTreeUpdate(Date.now())
     })
-}
-//rusiuojam List by color
-const sortColor = () =>{
-    setList(oldList => {
-        return [...oldList].sort((a, b)=>{
-           if(a.color > b.color) return 1;
-           if(a.color < b.color) return -1;
-           return 0;
+}, [createTreeData]);
 
-        })
+useEffect (() => {
+    if(null === createAnialData){
+        return;
+    }
+    axios.post('http://localhost:3003/animals', createAnialData)
+    .then(res => {
+        // setTreeList(res.data)
     })
-}
+}, [createAnialData]);
 
-const deletList =()=>{
-    setList([])
-}
-//trinam id is listo
-const deleteItem = id =>{
-    setList(oldList => oldList.filter(obj => obj.id !== id))
-}
+//DELETE
+const [deleteTreeData, setDeleteTreeData] = useState(null)
+
+useEffect(()=> {
+    if(null === deleteTreeData){
+        return;
+    }
+    axios.delete('http://localhost:3003/trees/' + deleteTreeData.id)
+    .then(res => {
+        setLastTreeUpdate(Date.now());
+    })
+},[deleteTreeData])
+
+//EDIT TREES
+
+const [editTreeModalData, setEditTreeModalData] = useState(null)
+const [editTreeData, setEditTreeData] = useState(null)
+
+useEffect(() => {
+            if (null === editTreeData) {
+                return;
+            }
+            axios.put('http://localhost:3003/trees/' + editTreeData.id, editTreeData)
+            .then(res => {
+                setLastTreeUpdate(Date.now());
+            })
+        }, [editTreeData]);
+
 
 
 
@@ -74,51 +94,35 @@ const deleteItem = id =>{
     <div className="App">
       <header className="App-header">
         
-       <h1>Repeat Part III</h1>
+       <h1>Crud</h1>
     <div>
-       <label>Vardas</label>
-       <input type='text' onChange={e => setName(e.target.value)} value={name}></input>
-    </div>
-    <div>
-       <label>Color</label>
-       <input type='text' onChange={e => setColor(e.target.value)} value={color}></input>
-    </div>
-    <button type='button' onClick={add}>ADD</button>
-    <div> List
-        <ul>
-            
+        <CreateTree setCreateTreeData={setCreateTreeData}></CreateTree>
+        </div>
+        <div>
+            <CreateAnimal setCreateAnimalData={setCreateAnimalData} ></CreateAnimal>
+        </div>
+        
+        
+        <ul>Tree List
             {
-                
-                list.map((obj, i) => <List key={obj.id} obj={obj} index={i + 1} deleteItem={deleteItem} setModal={setModal}></List>)
+                treeList ? treeList.map((t, i) => <Tree key={t.id} tree={t} index={i +1} setDeleteTreeData={setDeleteTreeData} setEditTreeModalData={setEditTreeModalData}></Tree>): null
             }
-            
         </ul>
+        <ul>Animal List
+            {
+                animalsList ? animalsList.map((a, i) => <Animal key={a.id} animal={a} index={i +1}></Animal>) : null
+            }
+        </ul>
+
+        <TreeEdit setEditTreeData={setEditTreeData} editTreeModalData={editTreeModalData} setEditTreeModalData={setEditTreeModalData} ></TreeEdit>
+    </header>
     </div>
+       
 
   
-        <select onChange={handleSelect} value={select}>
-            <option value='small'>Small</option>
-            <option value='medium' >Medium</option>
-            <option value='lage'>Lage</option>
-            
-
-        </select>
-
-        <input type='checkbox' onChange={() => setRed(r=> !r)} value={red}></input><label>Red or Not</label>
-        <div>{range} m.</div>
-        <input type='range'  value={range}  min='1' max='300' onChange={e=> setRange(e.target.value)}></input>
-        <input type='number' value={count} onChange={e => setCount(e.target.value)}></input>    
-
-    <button onClick={sortName}>Sort By Name</button>
-    <button onClick={sortColor}>Sort by Color</button>
-    <button onClick={deletList}>Delete</button>
+        
     
-    
-    <Edit modal={modal} setModal={setModal} edit={edit}></Edit>
-    <Create add={add}></Create>
-      </header>
-    </div>
-  );
+  )
 }
 
 export default App;
