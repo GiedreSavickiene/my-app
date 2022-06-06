@@ -4,6 +4,7 @@ import colorReducer from './Reducwrs/colorReducer'
 import RandomColor from './Funkcijos/randColor';
 import textReducer from './Reducwrs/textReducer';
 import rand from './Funkcijos/rand';
+import arrayReducer from './Reducwrs/arrayReducer';
 
 
 
@@ -15,6 +16,10 @@ function App() {
 
     const [text, dispachText] = useReducer(textReducer, '000')
     const [inputText, setInputText] = useState('')
+
+    const [array, dispachArray] = useReducer(arrayReducer, [])
+    
+    
     
     const doBlack = () => {
         const action = {
@@ -71,6 +76,14 @@ function App() {
         dispachText(action1)
     }
 
+    const makeArray = () => {
+        const action1 = {
+            type: 'make_array',
+            
+        }
+        dispachArray(action1)
+    }
+ 
 
     
     return (
@@ -92,6 +105,13 @@ function App() {
 
              <input type='text' onChange={e => setInputText(e.target.value)} value={inputText} ></input>
              <button onClick={inputTexts}>Input Text</button>
+            <div>
+                {
+                   array.map((n, i) => <div key={i}>{n}</div>) 
+                }
+            </div>
+            <button onClick={makeArray}>Make Array</button>
+        
 
             </header>
         </div>
