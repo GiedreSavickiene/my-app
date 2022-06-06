@@ -27,6 +27,14 @@ function App() {
         }
         dispachColor(action1)
     }
+    const randomColor = () => {
+        const action1 = {
+            type: 'make_random' 
+        }
+        dispachColor(action1)
+    }
+
+
     
     return (
         <div className="App">
@@ -36,6 +44,7 @@ function App() {
              <button onClick={doBlack}>BLACK</button>    
              <button onClick={doBlue}>BLUE</button>   
              <button onClick={doBlueBlack}>BLACK/BLUE</button> 
+             <button onClick={randomColor}>Random Color</button>
             </header>
         </div>
      );
