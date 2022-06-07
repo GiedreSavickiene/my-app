@@ -36,6 +36,10 @@ function arrayReducer(state, action1) {
             // cia grazina pradini masyva
             newState = [...state].sort((a, b) => a.row - b.row)
             break;
+        case 'imput_filter_list':
+
+            newState = state.map(e => e.number > action1.payload ? { ...e, show: true } : { ...e, show: false })
+            break;
 
 
         default:

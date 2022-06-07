@@ -1,4 +1,4 @@
-import { useReducer, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import './App.scss';
 import colorReducer from './Reducwrs/colorReducer'
 import RandomColor from './Funkcijos/randColor';
@@ -18,6 +18,9 @@ function App() {
     const [inputText, setInputText] = useState('')
 
     const [array, dispachArray] = useReducer(arrayReducer, [])
+
+    const [textImput, setTextImput] = useState('')
+    const [filterText, setFilterText] = useState(0)
     
     
     
@@ -126,6 +129,24 @@ function App() {
         }
         dispachArray(action1)
     }
+    const filterImput = () => {
+        const action1 = {
+            type: 'imput_filter_list',
+            payload: filterText
+            
+        }
+        dispachArray(action1)
+    }
+
+    // useEffect(()=> {
+    //     if(filterText == 0){
+    //         return
+    //     }
+    //     filterImput();
+
+    // }, [filterText])
+
+
 
 
  
@@ -162,6 +183,9 @@ function App() {
             <button onClick={less400}>Filter Less 400</button>
             <button onClick={showAll}>Show all</button>
             <button onClick={defaultList}>Defolt Sort</button>
+            <input type="number" min='0' max='1000' step='50' value={filterText} onChange={e => setFilterText(e.target.value)}></input>
+            <button onClick={filterImput}>Filter List</button>
+
         
 
             </header>
