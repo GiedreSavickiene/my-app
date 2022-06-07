@@ -119,6 +119,13 @@ function App() {
         }
         dispachArray(action1)
     }
+    const defaultList = () => {
+        const action1 = {
+            type: 'def_sort_list',
+            
+        }
+        dispachArray(action1)
+    }
 
 
  
@@ -154,6 +161,7 @@ function App() {
             <button onClick={makeFilter}>Filter</button>
             <button onClick={less400}>Filter Less 400</button>
             <button onClick={showAll}>Show all</button>
+            <button onClick={defaultList}>Defolt Sort</button>
         
 
             </header>

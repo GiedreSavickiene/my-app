@@ -8,10 +8,11 @@ function arrayReducer(state, action1) {
             // for(let i = 0; i < 10; i++){
             //     newState.push({number: rend(100, 999), color: RandomColor()})
             // }
-            newState = [...Array(10)].map(_ => ({
+            newState = [...Array(10)].map((_, i) => ({
                 number: rand(100, 999),
                 color: RandomColor(),
-                show: true
+                show: true,
+                row: i
             }))
             break;
         case 'sort_array':
@@ -30,6 +31,10 @@ function arrayReducer(state, action1) {
         case 'show_all':
             // newState = state.map(e => e.number ? { ...e, show: true } : { ...e, show: false })
             newState = state.map(e => ({ ...e, show: true }))
+            break;
+        case 'def_sort_list':
+            // cia grazina pradini masyva
+            newState = [...state].sort((a, b) => a.row - b.row)
             break;
 
 
