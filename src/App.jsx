@@ -91,6 +91,22 @@ function App() {
         }
         dispachArray(action1)
     }
+    const blackNumber = () => {
+        const action1 = {
+            type: 'black_number',
+            
+        }
+        dispachArray(action1)
+    }
+    const makeFilter = () => {
+        const action1 = {
+            type: 'filter_number',
+            
+        }
+        dispachArray(action1)
+    }
+
+
  
 
     
@@ -115,11 +131,13 @@ function App() {
              <button onClick={inputTexts}>Input Text</button>
             <div>
                 {
-                   array.map((n, i) => <div key={i}>{n.number}</div>) 
+                   array.map((n, i) => <div key={i} style={{color: n.color}}>{n.number }</div>) 
                 }
             </div>
             <button onClick={makeArray}>Make Array</button>
             <button onClick={sortArray}>Sort List</button>
+            <button onClick={blackNumber}>Black Number</button>
+            <button onClick={makeFilter}>Filter</button>
         
 
             </header>
