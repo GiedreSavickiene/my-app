@@ -105,6 +105,13 @@ function App() {
         }
         dispachArray(action1)
     }
+    const less400 = () => {
+        const action1 = {
+            type: 'less_number',
+            
+        }
+        dispachArray(action1)
+    }
 
 
  
@@ -131,13 +138,14 @@ function App() {
              <button onClick={inputTexts}>Input Text</button>
             <div>
                 {
-                   array.map((n, i) => <div key={i} style={{color: n.color}}>{n.number }</div>) 
+                   array.map((n, i) => n.show ? <div key={i} style={{color: n.color}}>{n.number }</div> : null) 
                 }
             </div>
             <button onClick={makeArray}>Make Array</button>
             <button onClick={sortArray}>Sort List</button>
             <button onClick={blackNumber}>Black Number</button>
             <button onClick={makeFilter}>Filter</button>
+            <button onClick={less400}>Filter Less 400</button>
         
 
             </header>
