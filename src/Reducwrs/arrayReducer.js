@@ -27,6 +27,10 @@ function arrayReducer(state, action1) {
         case 'less_number':
             newState = state.map(e => e.number < 400 ? { ...e, show: true } : { ...e, show: false })
             break;
+        case 'show_all':
+            // newState = state.map(e => e.number ? { ...e, show: true } : { ...e, show: false })
+            newState = state.map(e => ({ ...e, show: true }))
+            break;
 
 
         default:

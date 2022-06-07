@@ -112,6 +112,13 @@ function App() {
         }
         dispachArray(action1)
     }
+    const showAll = () => {
+        const action1 = {
+            type: 'show_all',
+            
+        }
+        dispachArray(action1)
+    }
 
 
  
@@ -146,6 +153,7 @@ function App() {
             <button onClick={blackNumber}>Black Number</button>
             <button onClick={makeFilter}>Filter</button>
             <button onClick={less400}>Filter Less 400</button>
+            <button onClick={showAll}>Show all</button>
         
 
             </header>
