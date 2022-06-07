@@ -9,6 +9,7 @@ function textReducer(state, action1) {
             newState = action1.payload;
             break;
 
+
         default:
             newState = state;
     }

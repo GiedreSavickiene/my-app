@@ -83,6 +83,14 @@ function App() {
         }
         dispachArray(action1)
     }
+
+    const sortArray = () => {
+        const action1 = {
+            type: 'sort_array',
+            
+        }
+        dispachArray(action1)
+    }
  
 
     
@@ -107,10 +115,11 @@ function App() {
              <button onClick={inputTexts}>Input Text</button>
             <div>
                 {
-                   array.map((n, i) => <div key={i}>{n}</div>) 
+                   array.map((n, i) => <div key={i}>{n.number}</div>) 
                 }
             </div>
             <button onClick={makeArray}>Make Array</button>
+            <button onClick={sortArray}>Sort List</button>
         
 
             </header>
