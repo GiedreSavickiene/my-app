@@ -30,6 +30,14 @@ function App() {
         }
         dispachBooks(action);
     }
+    const defoltSort = () => {
+        const action = {
+            type: 'defolt_sort'
+        }
+        dispachBooks(action);
+    }
+
+
 
     
   
@@ -43,7 +51,10 @@ function App() {
                  books.map(u  => <div key={u.id}> {u.title}</div>)
              }
             </div>
+            <div className='.squer-garden'>
             <button onClick={sortBooks}>Sort books</button>
+            <button onClick={defoltSort}>Defolt Sort</button>
+            </div>
             </header>
         </div>
      );
