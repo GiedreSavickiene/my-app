@@ -11,6 +11,7 @@ function App() {
     
 
     const [books, dispachBooks ] = useReducer(booksReducer, [])
+    const [reload, setReload] = useState(false);
 
     useEffect (() => {
         axios.get('https://in3.dev/knygos/')
@@ -22,7 +23,7 @@ function App() {
             }
             dispachBooks(action)
         })
-    }, []);
+    }, [reload]);
 
     const sortBooks = () => {
         const action = {
@@ -36,6 +37,29 @@ function App() {
         }
         dispachBooks(action);
     }
+    const moreThenSeven = () => {
+        const action = {
+            type: 'more_seven'
+        }
+        dispachBooks(action);
+    }
+    const showAll = () => {
+        const action = {
+            type: 'show_all'
+        }
+        dispachBooks(action);
+    }
+    const doReload = () => {
+        const action = {
+            type: 'reload'
+        }
+        dispachBooks(action);
+        setReload(r => !r)
+    }
+
+
+
+
 
 
 
@@ -48,12 +72,15 @@ function App() {
              <h1>Books</h1>
              <div>
              {
-                 books.map(u  => <div key={u.id}> {u.title}</div>)
+                 books.map(u  => u.show ? <div key={u.id}> {u.title} Price: {u.price} EUR</div> : null)
              }
             </div>
             <div className='.squer-garden'>
             <button onClick={sortBooks}>Sort books</button>
             <button onClick={defoltSort}>Defolt Sort</button>
+            <button onClick={moreThenSeven}>More than 13 eur</button>
+            <button onClick={showAll}>Show All</button>
+            <button onClick={doReload}>Reload</button>
             </div>
             </header>
         </div>
