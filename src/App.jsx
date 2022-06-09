@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import './App.scss';
 import Te from './Components/023/Te'
 import Number3 from './Components/023/Number3';
@@ -12,15 +12,25 @@ function App() {
     const [number3, setNumber3] = useState(1)
     const [number5, setNumber5] = useState(1)
     const [number7, setNumber7] = useState(7)
+    const [number9, setNumber9] = useState(9)
 
 
     const plusNuber = () =>
     setNumber(n => n + 1)
 
+    const abc = useCallback(() => {
+        console.log('ABC' + number)
+    },[number])
+
+    useEffect(() => {
+        // console.log('Go')
+        abc()
+    }, [abc]);
+
   
   return (
       <Number5.Provider value={number5}>
-      <Number3.Provider value={{number3, number7}}  >
+      <Number3.Provider value={{number3, number7, setNumber9}}  >
     <div className="App">
       <header className="App-header">
         
@@ -32,6 +42,8 @@ function App() {
        <button onClick={() => setNumber3(n => n + 3) }>Plus 3</button>
        <button onClick={() => setNumber5(n => n + 5) }>Plus 5</button>
        <button onClick={() => setNumber7(n => n + 7) }>Plus 7</button>
+       <h2>{number9}</h2>
+       {/* <button onClick={() => setNumber9(n => n + 9)} number={number9}></button> */}
 
         </div>
        
