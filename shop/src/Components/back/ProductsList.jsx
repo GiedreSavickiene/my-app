@@ -13,7 +13,7 @@ function ProductsList(){
         <div className="col-7">
             <div className="card">
                 <div className="card-header">
-                     <h2>Produktu sarasas</h2>
+                     <h2>Produktų sąrašas</h2>
                 </div>
                 <div className="card-body">
                     <ul className="list-group">

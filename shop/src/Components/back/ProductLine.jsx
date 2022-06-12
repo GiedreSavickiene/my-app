@@ -2,7 +2,29 @@ function ProductLine({product}){
 
     return(
         <li className="list-group-item">
-            {product.title}
+            <div className="product-line">
+                <div className="product-line_content">
+            
+                <div className="product-line_content_top">
+                    <div className="product-line_content_top_title">
+                         {product.title}
+                    </div>
+                    <div className="product-line_content_top_price">
+                         {product.price}
+                    </div>
+                    <div className="product-line_content_top_code">
+                        {product.code}
+                    </div>
+                </div>
+                <div className="product-line_content_bottom">
+                    {product.description}
+                </div>
+
+            </div> 
+            <div className="product-line_buttons">
+            </div> 
+         </div> 
+            
         </li>
     )
 }
