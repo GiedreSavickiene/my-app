@@ -54,34 +54,19 @@ app.post("/admin/products", (req, res) => {
     );
 });
 
-// app.post("/animals", (req, res) => {
-//     const sql = `
-//         INSERT INTO animals
-//         (name, type, age, has_owner, )
-//         VALUES (?, ?, ?, ?)
-//     `;
 
-//     con.query(
-//         sql,
-//         [req.body.name, req.body.type, !req.body.age ? 0 : req.body.age, req.body.has_owner],
-//         (err, results) => {
-//             if (err) throw err;
-//             res.send(results);
-//         }
-//     );
-// });
 
 // //DELETE Trees
-// app.delete('/trees/:id', (req, res) => {
-//     const sql = `
-//         DELETE FROM trees
-//         WHERE id = ?
-//         `;
-//     con.query(sql, [req.params.id], (err, result) => {
-//         if (err) throw err;
-//         res.send(result);
-//     });
-// });
+app.delete('/admin/products/:id', (req, res) => {
+    const sql = `
+        DELETE FROM products
+        WHERE id = ?
+        `;
+    con.query(sql, [req.params.id], (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
 
 // //EDIT TREES
 // app.put("/trees/:id", (req, res) => {

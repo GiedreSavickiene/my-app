@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import axios from 'axios'
 import ProductCreate from './ProductCreate';
 import Message from './Message';
+import ProductEdit from './ProductEdit';
 
 function Back() {
 
@@ -16,6 +17,8 @@ function Back() {
     const [message, setMessage] = useState({show: false});
 
     const [createProductData, setCreateProductData] = useState(null);
+    const [deleteProductData, setDeleteProductData] = useState(null);
+
 
     useEffect(() => {
         axios.get('http://localhost:3003/admin/products')
@@ -30,6 +33,14 @@ function Back() {
         
     }, [createProductData]);
 
+    useEffect(() => {
+        if(deleteProductData === null) return;
+        axios.delete('http://localhost:3003/admin/products/', deleteProductData.id)
+        .then(res =>setLastProductUpdate(Date.now()))
+        showMessage('success', 'Produktas sekmingai istrintas')
+        
+    }, [deleteProductData]);
+
     const showMessage = (type, text) => {
       setMessage({
         type,
@@ -40,7 +51,7 @@ function Back() {
     }
 
   return (
-    <BackContext.Provider value={{products, setCreateProductData, message}}>
+    <BackContext.Provider value={{products, setCreateProductData, message,setDeleteProductData}}>
         <div className="container">
             <div className="row">
                      <NavBAr></NavBAr>
@@ -50,6 +61,7 @@ function Back() {
             </div>
         </div>
         <Message></Message>
+        <ProductEdit></ProductEdit>
     
     </BackContext.Provider>
   );
