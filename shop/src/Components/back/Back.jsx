@@ -16,6 +16,8 @@ function Back() {
     const [lastProductUpdate, setLastProductUpdate] = useState(Date.now());
     const [message, setMessage] = useState({show: false});
 
+     const [modalProductData, setModalProductData] = useState(null);
+
     const [createProductData, setCreateProductData] = useState(null);
     const [deleteProductData, setDeleteProductData] = useState(null);
 
@@ -33,13 +35,15 @@ function Back() {
         
     }, [createProductData]);
 
-    useEffect(() => {
-        if(deleteProductData === null) return;
-        axios.delete('http://localhost:3003/admin/products/', deleteProductData.id)
-        .then(res =>setLastProductUpdate(Date.now()))
-        showMessage('success', 'Produktas sekmingai istrintas')
-        
+     useEffect(() => {
+        if (deleteProductData === null) return;
+        axios.delete('http://localhost:3003/admin/products/' + deleteProductData.id)
+            .then(_ => {
+                setLastProductUpdate(Date.now());
+                showMessage('success', 'Produktas sėkmingai ištrintas');
+            });
     }, [deleteProductData]);
+
 
     const showMessage = (type, text) => {
       setMessage({
@@ -47,11 +51,19 @@ function Back() {
         text,
         show: true
       });
-      setInterval(() => setMessage({show: false}), 1000000);
+      setInterval(() => setMessage({show: false}), 8000);
     }
 
   return (
-    <BackContext.Provider value={{products, setCreateProductData, message,setDeleteProductData}}>
+    <BackContext.Provider value={
+      {products, 
+      setCreateProductData, 
+      message,
+      setDeleteProductData,
+      modalProductData,
+      setModalProductData
+
+      }}>
         <div className="container">
             <div className="row">
                      <NavBAr></NavBAr>

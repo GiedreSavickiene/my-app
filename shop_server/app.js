@@ -56,7 +56,7 @@ app.post("/admin/products", (req, res) => {
 
 
 
-// //DELETE Trees
+// //DELETE 
 app.delete('/admin/products/:id', (req, res) => {
     const sql = `
         DELETE FROM products

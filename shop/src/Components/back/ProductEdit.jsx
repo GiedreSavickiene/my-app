@@ -12,15 +12,20 @@ const empty = {
 
 
 function ProductEdit(){
-    const { setCreateProductData } = useContext(BackContext);
+    const { modalProductData } = useContext(BackContext);
 
     const [inputs, setInputs] = useState(empty);
 
     const handleInputs = (e, input) => setInputs(i => ({ ...i, [input]: e.target.value }));
 
     const edit = () => {
-        setCreateProductData({...inputs, price: parseFloat(inputs.price)});
+        // setCreateProductData({...inputs, price: parseFloat(inputs.price)});
+        
         setInputs(empty);
+    }
+
+     if (modalProductData === null) {
+        return null;
     }
 
 

@@ -4,7 +4,7 @@ import BackContext from "../../Contexts/BackContext";
 function ProductLine({product}){
     
 
-    const {setDeleteProductData} = useContext(BackContext)
+    const {setDeleteProductData,setModalProductData } = useContext(BackContext)
 
     return(
         <li className="list-group-item">
@@ -28,7 +28,7 @@ function ProductLine({product}){
 
             </div> 
             <div className="product-line_buttons">
-                <button type="button" className="btn btn-success mr-2" >Redaguoti</button>
+                <button type="button" className="btn btn-success mr-2 fu" onClick={() => setModalProductData(product)}  >Redaguoti</button>
                 <button type="button" className="btn btn-danger" onClick={() => setDeleteProductData(product) }>Trinti</button>
             </div> 
          </div> 
