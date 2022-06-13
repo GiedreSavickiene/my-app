@@ -22,7 +22,7 @@ function ProductCreate(){
     const handleInput = (e, input) => setInputs(i => ({...i, [input]: e.target.value}))
 
     const create = () => {
-        setCreateProductData(inputs);
+        setCreateProductData({...inputs, price: parseFloat(inputs.price)});
         setInputs(empty);
         button.current.blur()
     }

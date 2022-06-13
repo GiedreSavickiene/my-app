@@ -33,33 +33,26 @@ app.get("/admin/products", (req, res) => {
     });
 });
 
-// app.get("/animals", (req, res) => {
-//     const sql = `SELECT * FROM animals`;
 
-//     con.query(sql, (err, result) => {
-//         if (err) throw err;
-//         res.send(result);
-//     });
-// });
 
 // //CREATE, irasymas i duomenu baze
 
-// app.post("/trees", (req, res) => {
-//     const sql = `
-//         INSERT INTO trees
-//         (title, height, type)
-//         VALUES (?, ?, ?)
-//     `;
+app.post("/admin/products", (req, res) => {
+    const sql = `
+        INSERT INTO products
+        (title, code, price, description)
+        VALUES (?, ?, ?, ?)
+    `;
 
-//     con.query(
-//         sql,
-//         [req.body.title, !req.body.height ? 0 : req.body.height, req.body.type],
-//         (err, results) => {
-//             if (err) throw err;
-//             res.send(results);
-//         }
-//     );
-// });
+    con.query(
+        sql,
+        [req.body.title, req.body.code, req.body.price, req.body.description],
+        (err, results) => {
+            if (err) throw err;
+            res.send(results);
+        }
+    );
+});
 
 // app.post("/animals", (req, res) => {
 //     const sql = `
