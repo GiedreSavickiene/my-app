@@ -12,7 +12,7 @@ function Back() {
     const [products, setProducts] = useState(null);
 
     useEffect(() => {
-        axios.get('http://localhost:3000/admin/products')
+        axios.get('http://localhost:3003/admin/products')
         .then(res =>setProducts(res.data))
     }, []);
 

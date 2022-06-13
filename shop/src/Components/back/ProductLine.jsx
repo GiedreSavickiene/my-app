@@ -1,4 +1,5 @@
 function ProductLine({product}){
+    console.log(product)
 
     return(
         <li className="list-group-item">
@@ -10,7 +11,7 @@ function ProductLine({product}){
                          {product.title}
                     </div>
                     <div className="product-line_content_top_price">
-                         {product.price}
+                         {(parseFloat(product.price)).toFixed(2)} eur
                     </div>
                     <div className="product-line_content_top_code">
                         {product.code}
@@ -22,6 +23,8 @@ function ProductLine({product}){
 
             </div> 
             <div className="product-line_buttons">
+                <button type="button" className="btn btn-success mr-2" >Redaguoti</button>
+                <button type="button" className="btn btn-danger">Trinti</button>
             </div> 
          </div> 
             

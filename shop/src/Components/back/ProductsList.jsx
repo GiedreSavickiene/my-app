@@ -19,7 +19,7 @@ function ProductsList(){
                     <ul className="list-group">
                         {
                             products === null ? <Loader/> : (
-                                products.length ? products.map(p => <ProductLine key={products.id} products={p}></ProductLine>) :
+                                products.length ? products.map(p => <ProductLine key={p.id} product={p}></ProductLine>) :
                                 <ProductLineEmpty/>
                             )
                         }
