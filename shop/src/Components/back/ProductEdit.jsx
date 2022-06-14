@@ -1,6 +1,7 @@
 import { useEffect } from "react";
-import { useContext, useState } from "react";
+import { useContext, useState, useRef } from "react";
 import BackContext from "../../Contexts/BackContext";
+import getBase64 from "../../Functions/getBase64";
 
 const empty = {
     title: '',
@@ -16,11 +17,19 @@ function ProductEdit(){
     const { modalProductData,setModalProductData, setEditProductData  } = useContext(BackContext);
 
     const [inputs, setInputs] = useState(empty);
+    const fileInput = useRef();
+
 
     const handleInputs = (e, input) => setInputs(i => ({ ...i, [input]: e.target.value }));
 
     const edit = () => {
-      setEditProductData({...inputs, price: parseFloat(inputs.price), id: modalProductData.id});
+        const file = fileInput.current.files[0];
+        if (file) {
+            getBase64(file)
+                .then(photo => setEditProductData({ ...inputs, photo, price: parseFloat(inputs.price), id: modalProductData.id }));
+        } else {
+            setEditProductData({ ...inputs, price: parseFloat(inputs.price), id: modalProductData.id });
+        }
         
        setModalProductData (null);
     }
@@ -78,6 +87,19 @@ function ProductEdit(){
                                             <div className="form-group">
                                                 <label className="fu gray">Aprašymas:</label>
                                                 <textarea className="form-control" rows="3" value={inputs.description} onChange={e => handleInputs(e, 'description')}></textarea>
+                                            </div>
+                                        </div>
+                                        <div className="col-12">
+                                            <div className="form-group">
+                                                <label className="fu gray">Nuotrauka:</label>
+                                                <input type="file" ref={fileInput} className="form-control" />
+                                            </div>
+                                        </div>
+                                        <div className="col-12">
+                                            <div className="edit-photo">
+                                                {
+                                                    modalProductData.photo ? <img src={modalProductData.photo} alt={modalProductData.title} /> : null
+                                                }
                                             </div>
                                         </div>
                                     </div>

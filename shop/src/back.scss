@@ -164,6 +164,16 @@ h2{
             font-size: 12px;
             text-align: justify;
         }
+                  &_photo {
+                      padding-top: 15px;
+        
+                      img {
+                          height: auto;
+                          max-height: 300px;
+                          width: 100%;
+                      }
+                  }
+                  
     }
 
     &_buttons {

@@ -25,6 +25,11 @@ function ProductLine({product}){
                 <div className="product-line_content_bottom">
                     {product.description}
                 </div>
+                <div className="product-line_content_photo">
+                    {
+                        product.photo ? <img src={product.photo} alt='{product.title}'/> : null
+                    }
+                </div>
 
             </div> 
             <div className="product-line_buttons">
