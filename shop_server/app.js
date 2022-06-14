@@ -68,19 +68,19 @@ app.delete('/admin/products/:id', (req, res) => {
     });
 });
 
-// //EDIT TREES
-// app.put("/trees/:id", (req, res) => {
-//     const sql = `
-//         UPDATE trees
-//         SET title = ?, type = ?, height = ?
-//         WHERE id = ?
-//     `;
+// //EDIT 
+app.put("/admin/products/:id", (req, res) => {
+    const sql = `
+        UPDATE products
+        SET title = ?, description = ?, code = ?, price = ?
+        WHERE id = ?
+    `;
 
-//     con.query(sql, [req.body.title, req.body.type, req.body.height, req.params.id], (err, results) => {
-//         if (err) throw err;
-//         res.send(results);
-//     });
-// });
+    con.query(sql, [req.body.title, req.body.description, req.body.code, req.body.price, req.params.id], (err, results) => {
+        if (err) throw err;
+        res.send(results);
+    });
+});
 
 
 

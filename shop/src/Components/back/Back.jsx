@@ -20,6 +20,7 @@ function Back() {
 
     const [createProductData, setCreateProductData] = useState(null);
     const [deleteProductData, setDeleteProductData] = useState(null);
+    const [editProductData, setEditProductData] = useState(null);
 
 
     useEffect(() => {
@@ -44,6 +45,15 @@ function Back() {
             });
     }, [deleteProductData]);
 
+     useEffect(() => {
+        if (editProductData === null) return;
+        axios.put('http://localhost:3003/admin/products/' + editProductData.id, editProductData)
+            .then(_ => {
+                setLastProductUpdate(Date.now());
+                showMessage('success', 'Produktas sėkmingai redaguotas');
+            });
+    }, [editProductData]);
+
 
     const showMessage = (type, text) => {
       setMessage({
@@ -61,7 +71,8 @@ function Back() {
       message,
       setDeleteProductData,
       modalProductData,
-      setModalProductData
+      setModalProductData,
+      setEditProductData
 
       }}>
         <div className="container">
