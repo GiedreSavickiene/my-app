@@ -1,8 +1,7 @@
 const express = require('express')
 const app = express()
 const port = 3003
-app.use(express.json({ limit: '50mb' }));
-// app.use(express.urlencoded({ limit: '50mb' }));
+
 
 
 app.use(
@@ -15,6 +14,8 @@ app.use(express.json());
 const cors = require("cors");
 app.use(cors());
 
+app.use(express.json({ limit: '50mb' }));
+// app.use(express.urlencoded({ limit: '50mb' }));
 
 
 const mysql = require("mysql");
@@ -86,6 +87,19 @@ app.put("/admin/products/:id", (req, res) => {
         res.send(results);
     });
 });
+
+app.get("/products", (req, res) => {
+    const sql = `
+    SELECT
+    *
+    FROM products
+`;
+    con.query(sql, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
 
 
 

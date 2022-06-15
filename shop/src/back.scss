@@ -39,8 +39,8 @@ h2{
     transform: rotateZ(45deg);
     perspective: 1000px;
     border-radius: 50%;
-    width: 48px;
-    height: 48px;
+    width: 148px;
+    height: 148px;
     color: blue;
 }
 
@@ -164,15 +164,15 @@ h2{
             font-size: 12px;
             text-align: justify;
         }
-                  &_photo {
-                      padding-top: 15px;
+        &_photo {
+            padding-top: 15px;
         
-                      img {
-                          height: auto;
-                          max-height: 300px;
-                          width: 100%;
-                      }
-                  }
+            img {
+              height: auto;
+              max-height: 300px;
+              width: 100%;
+            }
+        }
                   
     }
 
@@ -186,5 +186,13 @@ h2{
 
 
         }
+    }
+}
+.edit-photo{
+    img{
+        height: auto;
+        max-height: 300px;
+        max-width: 100%;
+
     }
 }

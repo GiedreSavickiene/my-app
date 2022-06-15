@@ -27,7 +27,7 @@ function ProductLine({product}){
                 </div>
                 <div className="product-line_content_photo">
                     {
-                        product.photo ? <img src={product.photo} alt='{product.title}'/> : null
+                        product.photo ? <img src={product.photo} alt={product.title}/> : null
                     }
                 </div>
 
