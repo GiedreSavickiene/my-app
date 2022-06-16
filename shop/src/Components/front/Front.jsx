@@ -8,6 +8,7 @@ import TopBar from './TopBar';
 import axios from 'axios'
 import {getProductsFromServer} from '../../Actions/produtcts';
 import FrontContext from '../../Contexts/FrontContext';
+import Bar from './Bar'
 
 
 
@@ -24,10 +25,11 @@ useEffect(() =>{
 
 
   return (
-    <FrontContext.Provider value={{products}}>
+    <FrontContext.Provider value={{products, dp}}>
     <div id='shop'>
       <div className="bin">
         <TopBar></TopBar>
+        <Bar></Bar>
         {
           products !== null ? <Products></Products> : <Loader></Loader>
         }

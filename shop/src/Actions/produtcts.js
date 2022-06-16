@@ -1,4 +1,4 @@
-import { GET_PRODUCTS_FROM_SERVER } from "../Constants/types"
+import { GET_PRODUCTS_FROM_SERVER, SORT_PRODUCTS } from "../Constants/types"
 
 
 
@@ -8,4 +8,11 @@ export function getProductsFromServer(products) {
         payload: products
     }
 
+}
+
+export function sortProducts(sortType) {
+    return {
+        type: SORT_PRODUCTS,
+        payload: sortType
+    }
 }
