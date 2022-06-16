@@ -108,13 +108,15 @@ function ProductEdit(){
                                             </div>
                                         </div>
                                         <div className="col-4">
-                                            <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" id="delete-photo" onChange={() => setDeletePhoto(d => !d) }/>
-                                                <label className="form-check-label" htmfor="gridCheck1">
-                                                 Trinti nuotrauką
-                                                </label>
-                                        </div>
-
+                                            {
+                                                modalProductData.photo ? (
+                                                    <div className="form-check">
+                                                        <input className="form-check-input" type="checkbox" id="delete-photo" onChange={() => setDeletePhoto(d => !d) }/>
+                                                         <label className="form-check-label" htmfor="gridCheck1">
+                                                             Trinti nuotrauką
+                                                        </label>
+                                                    </div>) : null
+                                            }
                                         </div>
                                     </div>
                                 </div>
