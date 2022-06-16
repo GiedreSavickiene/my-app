@@ -42,10 +42,44 @@
             padding: 15px;
 
             &_bin {
-                width: 400px;
-                height: 250px;
+                width: 460px;
+                height: 350px;
                 border: 1px solid skyblue;
                 padding: 10px;
+                &_top {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+                &_mid {
+                    width: 100%;
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: space-between;
+                    &_img {
+                        width: 50%;
+                        display: flex;
+                        align-items: flex-start;
+                        justify-content: center;
+                        img{
+                            height: auto;
+                            max-height: 220px;
+                            max-width: 100%;
+                            display: block;
+                        }
+                    }
+                    &_desc {
+                        width: 50%;
+                        p{
+                            text-align: justify;
+                            font-size: 12px;
+                            overflow: hidden;
+                            padding-left: 7px;
+                            max-height: 220px;
+                        }
+                    }
+                }
             }
         }
     }
